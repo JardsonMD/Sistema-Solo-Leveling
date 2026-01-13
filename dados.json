@@ -1,9 +1,1 @@
-{
-    "xp": 0,
-    "missoes":{
-        "Treinar": false,
-        "Estudar Python": false,
-        "Estudar Japonês": false
-    }
-
-}
+{"xp": 0, "ultima_data": "2026-01-13", "missoes": {"Treinar": true, "Estudar Python": false, "Estudar Japon\u00c3\u00aas": false}}

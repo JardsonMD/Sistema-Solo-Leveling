@@ -1,5 +1,7 @@
 import funcoes
 
+funcoes.reset_diario()
+
 xp = funcoes.carregar_xp()
 opcao = 0
 while opcao != "4": 
@@ -9,17 +11,12 @@ while opcao != "4":
     
     match opcao:
         case "1":
-            print("Missões Diárias:")
-            print("- Treinar")
-            print("- Estudar Python")
-            print("- Estudar Japonês")
+           funcoes.mostrar_missoes()
         case "2":
-            xp += 50
-            funcoes.salvar_xp(xp)
-            print("Tarefa Concluída.")
-            print("Você Ganhou 50 XP.")
+            missao = input("Digite o nome da missão: ")
+            funcoes.concluir_missao(missao)
         case "3":
-            print("Seu XP atual é: ", xp)
+            print("Seu XP atual é: ", funcoes.carregar_xp())
         case "4":
             print("Encerrando Sistema.")
         case _:

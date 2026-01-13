@@ -1,22 +1,25 @@
 # Sistema Solo Leveling - Planejamento
 
 ## Objetivo
-Criar um sistema de tarefas gamificado inspirado em Solo Leveling:
-- XP
-- Missões diárias
-- Evolução de níveis
-- Persistência de dados
+- Criar um sistema de tarefas gamificado inspirado em Solo Leveling
+  - XP
+  - Missões diárias
+  - Evolução de níveis
+  - Persistência de dados
 
 ## Funcionalidades atuais
 - Menu interativo
 - Missões diárias
 - XP persistente
 - Loop contínuo
+- Reset diário automático
 
 ## Próximas funcionalidades
-1. Sistema de níveis baseado em XP
-2. Missões limitadas a uma vez por dia
-3. Recompensas e achievements
-4. Futuro: interface gráfica
-5. Automatizações no PC (PyAutoGUI)
-6. App mobile (integrar com Python ou outra linguagem)
+- Sistema de níveis baseado em XP
+- Missões limitadas a uma vez por dia
+- Recompensas e achievements
+- Futuro: interface gráfica
+- Automatizações no PC (PyAutoGUI)
+- App mobile (integrar com Python ou outra linguagem)
+- Streaks diárias e bônus por consistência
+

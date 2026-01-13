@@ -5,3 +5,20 @@
 - Menu básico implementado
 - XP persistente implementado
 - Biblioteca única criada (`funcoes.py`)
+
+## 13/01
+- Reset diário implementado (missões zeram automaticamente a cada dia)
+- Missões e XP integrados com JSON (`dados.json`)
+- Funções separadas e consolidadas:
+  - `mostrar_menu()`
+  - `mostrar_missoes()`
+  - `concluir_missao()`
+  - `reset_diario()`
+  - `carregar_xp()`
+  - `salvar_dados()`
+- Corrigido bug de XP desatualizado no menu
+- Preparado para futuras funcionalidades:
+  - Adicionar streaks diárias
+  - Evitar duplicidade de salvamento de dados
+  - Escalabilidade para novas missões
+
