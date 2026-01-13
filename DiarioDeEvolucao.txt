@@ -1,0 +1,7 @@
+# Diário de Evolução
+
+## 12/01
+- Comecei o projeto Solo Leveling
+- Menu básico implementado
+- XP persistente implementado
+- Biblioteca única criada (`funcoes.py`)

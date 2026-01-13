@@ -1,0 +1,9 @@
+{
+    "xp": 0,
+    "missoes":{
+        "Treinar": false,
+        "Estudar Python": false,
+        "Estudar Japonês": false
+    }
+
+}
