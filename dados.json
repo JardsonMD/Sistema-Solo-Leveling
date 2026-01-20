@@ -1,1 +1,1 @@
-{"xp": 0, "ultima_data": "2026-01-13", "missoes": {"Treinar": true, "Estudar Python": false, "Estudar Japon\u00c3\u00aas": false}}
+{"player": {"xp": 120}, "ultima_data": "2026-01-19", "missoes": {"Treinar": {"tipo": 1, "feita": true, "xp": 50}, "Estudar Python": {"tipo": 1, "feita": true, "xp": 70}, "Estudar Japones": {"tipo": 1, "feita": false, "xp": 40}}}
