@@ -1,4 +1,4 @@
-from datetime import date
+import datetime as dt
 import json
 ARQUIVO = "dados.json"
 
@@ -9,25 +9,51 @@ def salvar_dados(dados):
     with open(ARQUIVO, "w", encoding= "utf-8") as f:
         json.dump(dados, f)
 
+# Carrega os dados do arquivo json
+def carregar_dados():
+    with open(ARQUIVO, "r", encoding= "utf-8") as f:
+        return json.load(f)
 # ========== DATA ==========
 
 # Reseta as missões diárias
-def reset_diario():
-    hoje = date.today().isoformat()
+def reset_missoes():
+    hoje = dt.datetime.today()
 
-    try:
-        with open(ARQUIVO, "r", encoding= "utf-8") as f:
-            dados = json.load(f)
+    try:  
+        dados = carregar_dados()
     except FileNotFoundError:
         return
-    
-    if dados.get("ultima_data") != hoje:
+    ultima_data = dt.datetime.fromisoformat(dados["ultima_data"])
+    if ultima_data.date() != hoje.date():
         for missao in dados["missoes"]:
-            if dados["missoes"][missao]["tipo"] == 1:
-                dados["missoes"][missao]["feita"] = False
+            tipo = dados["missoes"][missao]["tipo"]
+            match tipo:
+                case 1:
+                    dados["missoes"][missao]["feita"] = False
+                case 2:
+                    data = dt.datetime.fromisoformat(dados["missoes"][missao]["data"])
+                    if (hoje - data).days >= 7:
+                        dados["missoes"][missao]["feita"] = False
+                        nova_data = hoje - dt.timedelta(days = hoje.weekday())
+                        nova_data = nova_data.replace(hour=0, minute=0, second=0, microsecond=0)
+                        dados["missoes"][missao]["data"] = nova_data.isoformat()
+                case 3:
+                    data = dt.datetime.fromisoformat(dados["missoes"][missao]["data"])
+                    if hoje.month != data.month or hoje.year != data.year:
+                        dados["missoes"][missao]["feita"] = False
+                        nova_data = hoje.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+                        dados["missoes"][missao]["data"] = nova_data.isoformat()
+                case 4:
+                        data = dt.datetime.fromisoformat(dados["missoes"][missao]["data"])
+                        if hoje > data:
+                            dados["missoes"][missao]["tipo"] = 0
+                            dados["missoes"][missao]["data"] = ""
+                case _:
+                    continue
+            
 
-        dados["ultima_data"] = hoje
-        salvar_dados(dados)
+    dados["ultima_data"] = hoje.isoformat()
+    salvar_dados(dados)
 
 
 
@@ -41,9 +67,8 @@ def calc_nivel(xp):
 # Carrega o XP do arquivo json
 def carregar_xp():
     try:
-        with open(ARQUIVO, "r", encoding= "utf-8") as f:
-            dados = json.load(f)
-            return dados["player"]["xp"]
+        dados = carregar_dados()
+        return dados["player"]["xp"]
     except FileNotFoundError:
         return 0
 
@@ -52,8 +77,7 @@ def carregar_xp():
 # Mostra o Menu para o usuário
 def mostrar_menu():
 
-    with open(ARQUIVO, "r", encoding = "utf-8") as f:
-        dados = json.load(f)
+    dados = carregar_dados()
 
     xp = dados["player"]["xp"]
     nivel = calc_nivel(xp)
@@ -72,8 +96,7 @@ def mostrar_menu():
 # Mostra a missão pro usuário
 def mostrar_missoes():
     try:
-        with open(ARQUIVO, "r", encoding= "utf-8") as f:
-            dados = json.load(f)
+        dados = carregar_dados()
         
         print("Missões Diárias")
         for missao in dados["missoes"]:
@@ -85,15 +108,14 @@ def mostrar_missoes():
 
 # Marca uma missão como concuida
 def concluir_missao(nome_missao):
-    with open(ARQUIVO, "r", encoding= "utf-8") as f:
-        dados = json.load(f)
+    dados = carregar_dados()
     
     if nome_missao in dados["missoes"]:
         if not dados["missoes"][nome_missao]["feita"]:
             dados["missoes"][nome_missao]["feita"] = True
             dados["player"]["xp"] += dados["missoes"][nome_missao]["xp"]
             salvar_dados(dados)
-            print("Missão concluida. + ", dados["missoes"][nome_missao]["xp"], "XP.")
+            print("Missão concluida. +", dados["missoes"][nome_missao]["xp"], "XP.")
         else:
             print("Essa missão já foi concluída.")
     else:

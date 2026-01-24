@@ -1,22 +1,22 @@
-import funcoes
+import funcoes as fun
 
-funcoes.reset_diario()
+fun.reset_missoes()
 
-xp = funcoes.carregar_xp()
+xp = fun.carregar_xp()
 opcao = 0
 while opcao != "4": 
-    funcoes.mostrar_menu()
+    fun.mostrar_menu()
     opcao = input("Escolha uma opção: ")
 
     
     match opcao:
         case "1":
-           funcoes.mostrar_missoes()
+           fun.mostrar_missoes()
         case "2":
             missao = input("Digite o nome da missão: ")
-            funcoes.concluir_missao(missao)
+            fun.concluir_missao(missao)
         case "3":
-            print("Seu XP atual é: ", funcoes.carregar_xp())
+            print("Seu XP atual é: ", fun.carregar_xp())
         case "4":
             print("Encerrando Sistema.")
         case _:
